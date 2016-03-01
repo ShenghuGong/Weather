@@ -1,5 +1,9 @@
 language: android
 
+# Use this Script instead default Script
+# jump over :connectedAndroidTestDebug Task
+script: "./gradlew build"
+
 android:
   components:
     # Uncomment the lines below if you want to
