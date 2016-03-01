@@ -4,6 +4,8 @@ language: android
 # jump over :connectedAndroidTestDebug Task
 script: "./gradlew build"
 
+sudo: false
+
 android:
   components:
     # Uncomment the lines below if you want to
