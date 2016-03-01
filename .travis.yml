@@ -1,0 +1,9 @@
+language: java
+
+after_success:false
+
+
+notifications:
+  email: false
+
+sudo: false
