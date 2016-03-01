@@ -21,13 +21,17 @@ android:
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    # - sys-img-armeabi-v7a-android-19
+    - sys-img-armeabi-v7a-android-23
     # - sys-img-x86-android-17
+
+    licenses:
+       - 'android-sdk-license-.+'
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
   directories:
+    - node_modules
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
