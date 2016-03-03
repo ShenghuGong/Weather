@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,11 +12,23 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
     tools:context="com.ivangong.weather.MainActivity"
+    android:orientation="vertical"
     >
-
-  <TextView
-      android:text="Hello World!"
-      android:layout_width="wrap_content"
+  <Button
+      android:id="@+id/request_weather"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:text="查询天气"
       />
-</RelativeLayout>
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+    <TextView
+        android:id="@+id/weather_info"
+        android:text="Hello World!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+  </ScrollView>
+</LinearLayout>

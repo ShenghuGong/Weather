@@ -3,6 +3,9 @@
     package="com.ivangong.weather"
     >
 
+  <!-- 网络请求权限 -->
+  <uses-permission android:name="android.permission.INTERNET"/>
+
   <application
       android:name=".WeatherApp"
       android:allowBackup="true"

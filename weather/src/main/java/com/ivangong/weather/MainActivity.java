@@ -12,16 +12,27 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.ivangong.weather.MVPDemo.IGetWeatherView;
+import com.ivangong.weather.MVPDemo.presenters.GetWeatherPresenter;
 import com.ivangong.weather.ui.basic.BasicActivity;
 
 public class MainActivity extends BasicActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, IGetWeatherView {
+
+  GetWeatherPresenter mPresenter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    //TODO 要不要写在基类
+    ButterKnife.bind(this);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+
+    mPresenter = new GetWeatherPresenter(this);
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
@@ -112,5 +123,17 @@ public class MainActivity extends BasicActivity
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  @OnClick(R.id.request_weather) public void onRequestWeather(View view) {
+    getWeather();
+  }
+
+  @Override public void getWeather() {
+    mPresenter.getWeather();
+  }
+
+  @Override public void showWeatherResult(String result) {
+    ((TextView) findViewById(R.id.weather_info)).setText(result);
   }
 }
