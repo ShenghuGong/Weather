@@ -28,7 +28,7 @@ dependencies {
   compile 'com.android.support:appcompat-v7:23.2.0'
   compile 'com.android.support:multidex:1.0.1'
   compile 'com.google.code.gson:gson:2.6.2'
-  provided 'org.glassfish:javax.annotation:10.0-b28'
+  //  provided 'org.glassfish:javax.annotation:10.0-b28'
 
   // rx
   compile 'io.reactivex:rxjava:1.1.0'
