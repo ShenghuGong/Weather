@@ -126,10 +126,6 @@ public class MainActivity extends BasicActivity
   }
 
   @OnClick(R.id.request_weather) public void onRequestWeather(View view) {
-    getWeather();
-  }
-
-  @Override public void getWeather() {
     mPresenter.getWeather();
   }
 

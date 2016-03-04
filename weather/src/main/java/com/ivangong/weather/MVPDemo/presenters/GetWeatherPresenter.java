@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.os.Message;
 import com.ivangong.weather.MVPDemo.IGetWeatherView;
 import com.ivangong.weather.MVPDemo.domain.GetWeatherBiz;
+import com.ivangong.weather.MVPDemo.domain.IGetWeatherBiz;
 
 /**
  * Created by gongshenghu on 16/3/3.
@@ -12,7 +13,7 @@ import com.ivangong.weather.MVPDemo.domain.GetWeatherBiz;
  */
 public class GetWeatherPresenter {
   private IGetWeatherView mWeatherView;
-  private GetWeatherBiz mGetWeatherBiz;
+  private IGetWeatherBiz mGetWeatherBiz;
   private Handler mHandler;
   private static final int WEATHER_RESULT = 1;
 

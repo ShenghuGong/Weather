@@ -10,7 +10,7 @@ import java.net.URL;
 /**
  * Created by gongshenghu on 16/3/3.
  */
-public class GetWeatherBiz {
+public class GetWeatherBiz implements IGetWeatherBiz {
   /**
    * TODO 配置文件
    */
