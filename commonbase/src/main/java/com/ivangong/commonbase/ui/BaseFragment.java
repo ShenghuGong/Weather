@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.ButterKnife;
 
 /**
  * Created by gongshenghu on 16/2/29.
@@ -37,6 +38,12 @@ public abstract class BaseFragment extends Fragment {
 
   @Override public void onStop() {
     super.onStop();
+  }
+
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    //TODO 基类
+    ButterKnife.unbind(this);
   }
 
   @Override public void onDestroy() {
