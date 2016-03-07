@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -66,7 +68,12 @@ public class GetWeatherBiz implements IGetWeatherBiz {
   }
 
   private String requestWithRetrofit() {
+    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+    OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
     Retrofit retrofit = new Retrofit.Builder().baseUrl(IWeatherService.WEATHER_URL)
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build();
     IWeatherService weatherService = retrofit.create(IWeatherService.class);
