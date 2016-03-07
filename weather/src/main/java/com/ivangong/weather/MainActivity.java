@@ -1,5 +1,6 @@
 package com.ivangong.weather;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -131,5 +132,9 @@ public class MainActivity extends BasicActivity
 
   @Override public void showWeatherResult(String result) {
     ((TextView) findViewById(R.id.weather_info)).setText(result);
+  }
+
+  @Override public Context getContext() {
+    return this;
   }
 }
