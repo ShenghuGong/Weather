@@ -2,10 +2,16 @@ package com.ivangong.weather.MVPDemo.domain;
 
 import android.util.Log;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by gongshenghu on 16/3/3.
@@ -18,7 +24,8 @@ public class GetWeatherBiz implements IGetWeatherBiz {
   String httpArg = "cityid=CN101210101&key=5a7f3bf3b3814b20ba6fa59388c3d0ae";
 
   public String getWeather() {
-    return request(httpUrl, httpArg);
+    //return request(httpUrl, httpArg);
+    return requestWithRetrofit();
   }
 
   /**
@@ -56,5 +63,21 @@ public class GetWeatherBiz implements IGetWeatherBiz {
       e.printStackTrace();
     }
     return result;
+  }
+
+  private String requestWithRetrofit() {
+    Retrofit retrofit = new Retrofit.Builder().baseUrl(IWeatherService.WEATHER_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
+    IWeatherService weatherService = retrofit.create(IWeatherService.class);
+    Call<ResponseBody> call =
+        weatherService.getWeather("CN101210101", "5a7f3bf3b3814b20ba6fa59388c3d0ae");
+    try {
+      Response<ResponseBody> response = call.execute();
+      return response.body().string();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
 }
