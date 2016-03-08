@@ -13,6 +13,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by gongshenghu on 16/3/3.
@@ -79,6 +81,8 @@ public class GetWeatherBiz implements IGetWeatherBiz {
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .build();
     IWeatherService weatherService = retrofit.create(IWeatherService.class);
-    return weatherService.getWeather("CN101210101", "5a7f3bf3b3814b20ba6fa59388c3d0ae");
+    return weatherService.getWeather("CN101210101", "5a7f3bf3b3814b20ba6fa59388c3d0ae")
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
   }
 }

@@ -8,11 +8,9 @@ import com.ivangong.commonbase.presenters.BasePresenter;
 import com.ivangong.weather.MVPDemo.IGetWeatherView;
 import com.ivangong.weather.MVPDemo.domain.GetWeatherBiz;
 import com.ivangong.weather.MVPDemo.domain.IGetWeatherBiz;
+import com.ivangong.weather.rx.UiHttpSubscriber;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by gongshenghu on 16/3/3.
@@ -42,24 +40,16 @@ public class GetWeatherPresenter extends BasePresenter<IGetWeatherView> {
   }
 
   private void getWeatherWithRx() {
-    mGetWeatherBiz.requestWithRetrofitRx()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Subscriber<ResponseBody>() {
-          @Override public void onCompleted() {
-          }
-
-          @Override public void onError(Throwable e) {
-          }
-
-          @Override public void onNext(ResponseBody responseBody) {
-            try {
-              showResult(responseBody.string());
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          }
-        });
+    mGetWeatherBiz.requestWithRetrofitRx().subscribe(new UiHttpSubscriber<ResponseBody>() {
+      @Override public void onSucceed(ResponseBody responseBody) {
+        super.onSucceed(responseBody);
+        try {
+          showResult(responseBody.string());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    });
   }
 
   private void getWeatheronNewThread() {
