@@ -19,6 +19,6 @@ public class UiHttpSubscriber<T> extends HttpSubscriber<T> {
 
   @Override public void onHttpError(HttpException httpException) {
     super.onHttpError(httpException);
-    //common Http Code:404,500,503
+    // common Http Code:404,500,503
   }
 }
