@@ -5,10 +5,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import com.ivangong.commonbase.presenters.BasePresenter;
+import com.ivangong.commonbase.rx.HttpSubscriber;
 import com.ivangong.weather.MVPDemo.IGetWeatherView;
 import com.ivangong.weather.MVPDemo.domain.GetWeatherBiz;
 import com.ivangong.weather.MVPDemo.domain.IGetWeatherBiz;
-import com.ivangong.weather.rx.UiHttpSubscriber;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 
@@ -40,7 +40,7 @@ public class GetWeatherPresenter extends BasePresenter<IGetWeatherView> {
   }
 
   private void getWeatherWithRx() {
-    mGetWeatherBiz.requestWithRetrofitRx().subscribe(new UiHttpSubscriber<ResponseBody>() {
+    mGetWeatherBiz.requestWithRetrofitRx().subscribe(new HttpSubscriber<ResponseBody>() {
       @Override public void onSucceed(ResponseBody responseBody) {
         super.onSucceed(responseBody);
         try {
