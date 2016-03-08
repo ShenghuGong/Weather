@@ -1,8 +1,13 @@
 package com.ivangong.weather.MVPDemo.domain;
 
+import okhttp3.ResponseBody;
+import rx.Observable;
+
 /**
  * Created by gongshenghu on 16/3/4.
  */
 public interface IGetWeatherBiz {
-  public String getWeather();
+  String getWeather();
+
+  Observable<ResponseBody> requestWithRetrofitRx();
 }
