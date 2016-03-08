@@ -16,6 +16,12 @@
 #   public *;
 #}
 
+# Keep Generic
+-keepattributes Signature
+
+# keep Annotation
+-keepattributes *Annotation*
+
 ######### RxJava BEGIN
 -dontwarn sun.misc.Unsafe
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
