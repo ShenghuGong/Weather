@@ -1,7 +1,10 @@
 package com.ivangong.commonbase.presenters;
 
 import android.support.annotation.NonNull;
+import com.ivangong.commonbase.rx.RxCallManager;
 import java.lang.ref.WeakReference;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by gongshenghu on 16/3/4.
@@ -9,7 +12,8 @@ import java.lang.ref.WeakReference;
  * attachView() and detachView(). It also handles keeping a reference to the mvpView that
  * can be accessed from the children classes by calling getMvpView().
  */
-public abstract class BasePresenter<V extends BaseMVPView> implements IPresenter<V> {
+public abstract class BasePresenter<V extends BaseMVPView> implements IPresenter<V>, RxCallManager {
+  private RxCallManager.RxCallManagerImpl rxCallManager = new RxCallManager.RxCallManagerImpl();
   private WeakReference<V> mViewReference;
 
   public BasePresenter(@NonNull V mvpView) {
@@ -27,8 +31,16 @@ public abstract class BasePresenter<V extends BaseMVPView> implements IPresenter
     return mViewReference.get();
   }
 
+  @Override public void detachView() {
+    rxCallManager.unsubscribeAll();
+  }
+
   protected boolean isViewAttached() {
     //TODO check view is attached
     return true;
+  }
+
+  @Override public <T> void manageRxCall(Observable<T> observable, Subscriber<T> subscribe) {
+    rxCallManager.manageRxCall(observable, subscribe);
   }
 }

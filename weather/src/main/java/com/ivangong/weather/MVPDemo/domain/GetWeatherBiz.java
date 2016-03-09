@@ -1,20 +1,14 @@
 package com.ivangong.weather.MVPDemo.domain;
 
 import android.util.Log;
+import com.ivangong.commonbase.net.RetrofitWrapper;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by gongshenghu on 16/3/3.
@@ -25,6 +19,12 @@ public class GetWeatherBiz implements IGetWeatherBiz {
    */
   String httpUrl = "https://api.heweather.com/x3/weather";
   String httpArg = "cityid=CN101210101&key=5a7f3bf3b3814b20ba6fa59388c3d0ae";
+
+  IWeatherService weatherService;
+
+  public GetWeatherBiz() {
+    weatherService = RetrofitWrapper.getInstance().getRetrofit().create(IWeatherService.class);
+  }
 
   @Override public String getWeather() {
     return request(httpUrl, httpArg);
@@ -70,19 +70,7 @@ public class GetWeatherBiz implements IGetWeatherBiz {
   /**
    * TODO 封装BaseRetrofit & Base Rx
    */
-  @Override public Observable<ResponseBody> requestWithRetrofitRx() {
-    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-    OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-    Retrofit retrofit = new Retrofit.Builder().baseUrl(IWeatherService.WEATHER_URL)
-        .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .build();
-    IWeatherService weatherService = retrofit.create(IWeatherService.class);
-    return weatherService.getWeather("CN101210101", "5a7f3bf3b3814b20ba6fa59388c3d0ae")
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread());
+  @Override public Observable<ResponseBody> requestWithRetrofitRx(String cityid, String key) {
+    return weatherService.getWeather(cityid, key);
   }
 }

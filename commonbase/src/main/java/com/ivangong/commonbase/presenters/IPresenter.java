@@ -11,4 +11,6 @@ public interface IPresenter<V extends BaseMVPView> {
   void attachView(V mvpView);
 
   V getView();
+
+  void detachView();
 }

@@ -40,16 +40,18 @@ public class GetWeatherPresenter extends BasePresenter<IGetWeatherView> {
   }
 
   private void getWeatherWithRx() {
-    mGetWeatherBiz.requestWithRetrofitRx().subscribe(new UiHttpSubscriber<ResponseBody>() {
-      @Override public void onSucceed(ResponseBody responseBody) {
-        super.onSucceed(responseBody);
-        try {
-          showResult(responseBody.string());
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    });
+    manageRxCall(
+        mGetWeatherBiz.requestWithRetrofitRx("CN101210101", "5a7f3bf3b3814b20ba6fa59388c3d0ae"),
+        new UiHttpSubscriber<ResponseBody>() {
+          @Override public void onSucceed(ResponseBody responseBody) {
+            super.onSucceed(responseBody);
+            try {
+              showResult(responseBody.string());
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+        });
   }
 
   private void getWeatheronNewThread() {

@@ -9,5 +9,5 @@ import rx.Observable;
 public interface IGetWeatherBiz {
   String getWeather();
 
-  Observable<ResponseBody> requestWithRetrofitRx();
+  Observable<ResponseBody> requestWithRetrofitRx(String cityid, String key);
 }
