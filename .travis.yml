@@ -4,7 +4,8 @@ language: android
 # jump over :connectedAndroidTestDebug Task
 script: "./gradlew build"
 
-sudo: required
+#sudo: required
+sudo: false
 
 android:
   components:
