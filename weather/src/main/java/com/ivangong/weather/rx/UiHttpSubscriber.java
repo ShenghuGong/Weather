@@ -9,10 +9,6 @@ import retrofit2.adapter.rxjava.HttpException;
  */
 public class UiHttpSubscriber<T> extends HttpSubscriber<T> {
 
-  @Override public void onSucceed(T t) {
-    super.onSucceed(t);
-  }
-
   @Override public void onApiError(Throwable throwable) {
     super.onApiError(throwable);
   }

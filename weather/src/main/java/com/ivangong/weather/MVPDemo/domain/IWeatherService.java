@@ -9,6 +9,7 @@ import rx.Observable;
  * Created by gongshenghu on 16/3/7.
  */
 public interface IWeatherService {
+  // TODO 配置文件
   String WEATHER_URL = "https://api.heweather.com/";
   String WEATHER_PATH = "x3/weather";
   String CITY_ID = "cityid";

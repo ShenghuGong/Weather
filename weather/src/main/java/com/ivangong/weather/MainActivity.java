@@ -33,6 +33,7 @@ public class MainActivity extends BasicActivity
     setSupportActionBar(toolbar);
 
     mPresenter = new GetWeatherPresenter(this);
+    mPresenter.getWeather();
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
