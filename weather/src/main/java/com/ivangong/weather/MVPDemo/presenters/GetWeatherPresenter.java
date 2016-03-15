@@ -5,6 +5,7 @@ import com.ivangong.commonbase.presenters.BasePresenter;
 import com.ivangong.weather.MVPDemo.IGetWeatherView;
 import com.ivangong.weather.MVPDemo.domain.GetWeatherBiz;
 import com.ivangong.weather.MVPDemo.domain.IGetWeatherBiz;
+import com.ivangong.weather.config.ServerConfig;
 import com.ivangong.weather.rx.UiHttpSubscriber;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -21,7 +22,7 @@ public class GetWeatherPresenter extends BasePresenter<IGetWeatherView> {
   }
 
   public void getWeather() {
-    manageRxCall(mGetWeatherBiz.getWeather("CN101210101", "5a7f3bf3b3814b20ba6fa59388c3d0ae"),
+    manageRxCall(mGetWeatherBiz.getWeather("CN101210101", ServerConfig.AUTHORIZE_KEY),
         new UiHttpSubscriber<ResponseBody>() {
           @Override public void onSucceed(ResponseBody responseBody) {
             try {
