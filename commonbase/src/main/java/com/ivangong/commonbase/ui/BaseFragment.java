@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
+import com.ivangong.commonbase.BaseApp;
 
 /**
  * Created by gongshenghu on 16/2/29.
@@ -48,5 +49,6 @@ public abstract class BaseFragment extends Fragment {
 
   @Override public void onDestroy() {
     super.onDestroy();
+    BaseApp.getRefWatcher(getActivity()).watch(this);
   }
 }
