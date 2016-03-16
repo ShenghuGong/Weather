@@ -15,7 +15,8 @@ android {
     release {
       minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'),
-          '../commonbase/proguard-rules.pro', 'proguard-rules.pro'
+          '../commonbase/proguard-rules.pro', '../logger/proguard-rules.pro',
+          'proguard-rules.pro'
       //TODO signingConfig
     }
 
