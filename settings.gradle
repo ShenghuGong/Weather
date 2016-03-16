@@ -1,1 +1,1 @@
-include ':weather', ':commonbase'
+include ':weather', ':commonbase', ':logger'
