@@ -38,7 +38,9 @@ android {
 
     debug {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      proguardFiles getDefaultProguardFile('proguard-android.txt'),
+          '../commonbase/proguard-rules.pro', '../logger/proguard-rules.pro',
+          'proguard-rules.pro'
       signingConfig signingConfigs.debug
     }
   }
